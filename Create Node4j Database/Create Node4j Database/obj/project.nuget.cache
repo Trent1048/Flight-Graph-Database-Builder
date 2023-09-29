@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "pqkFe9mENX0CzRK2bk9tHJum1SAPS8NxVO3wa7OIg+SrO/2DGWnDxa3HnwHFXVjU7lu9YK9Ch2Downg/Ouz/eA==",
+  "dgSpecHash": "TPi1yNeCYc3PBDuFxNgRbPIDLe4of8K6nhe9JSFh9AUbzitnGQxRFXdTXyfp+LZ8aU2uG+FTOf5ZZriSNKm8iw==",
   "success": true,
   "projectFilePath": "C:\\Users\\trent\\OneDrive\\School Work\\WSU\\Fall 2023\\Big Data\\Flight-Graph-Database-Builder\\Create Node4j Database\\Create Node4j Database\\Create Node4j Database.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\trent\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\5.0.0\\microsoft.bcl.asyncinterfaces.5.0.0.nupkg.sha512",
+    "C:\\Users\\trent\\.nuget\\packages\\neo4j.driver\\5.13.0\\neo4j.driver.5.13.0.nupkg.sha512",
+    "C:\\Users\\trent\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512"
+  ],
   "logs": []
 }

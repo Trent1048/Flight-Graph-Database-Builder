@@ -39,6 +39,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Neo4j.Driver": {
+              "target": "Package",
+              "version": "[5.13.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
