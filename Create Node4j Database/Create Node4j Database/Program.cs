@@ -9,22 +9,14 @@ public class HelloWorldExample : IDisposable
 		_driver = GraphDatabase.Driver(uri, AuthTokens.Basic(user, password));
 	}
 
-	//Refactor into generic RunCypher function
-	public async void PrintGreeting(string message)
+	public async void RunCypher(string cypher)
 	{
 		using var session = _driver.AsyncSession();
-		var greeting = await session.ExecuteWriteAsync(
+		await session.ExecuteWriteAsync(
 			async tx => {
-				var result = await tx.RunAsync(
-					"CREATE (a:Company)" + 
-					"SET a.message = 'Hello World'" +
-					"RETURN a.message + ', from node ' + id(a)"
-					);
-					return (await result.SingleAsync())[0].As<string>();
+				await tx.RunAsync(cypher);
 			}
 		);
-
-        Console.WriteLine(greeting);
     }
 
 	public void Dispose()
@@ -32,33 +24,97 @@ public class HelloWorldExample : IDisposable
 		_driver?.Dispose();
 	}
 
-	/*CLEANUP FUNCTION DELETES EVERYTHING*/
 	public void FlushDB() 
 	{
-		//DELETE STUFF
+		RunCypher(
+			@"MATCH (n)
+			DETACH DELETE n"
+		);
 	}
 
-	public string CreateNode(List<string> line) 
+	public void CreateNode(List<string> line) 
 	{
-		//CREATE ONE NODE FROM CSV FILE
-		return "";
+		RunCypher(
+			$@"CREATE (a:Airport {{id: {line[0]}, name: ""{line[1]}"", city: ""{line[2]}"", country: ""{line[3]}""}})"
+		);
 	}
 
 	public string CreateRelation(List<string> line) 
 	{
-		//CREATE ONE RELATION FROM CSV
+		RunCypher(
+			$@"MATCH (source:Airport {{id: {line[3]}}}), (dest:Airport {{id: {line[5]}}})
+			CREATE (source)-[:ROUTE]->(dest)"	
+		);
 		return "";
 	}
 
 	public static void Main()
 	{
-		//Open CSVs
-		//Create each node
-		//Create each link
-		//Profit
+		bool quickModeEnabled = true;
+		if (quickModeEnabled) 
+		{
+			Console.WriteLine("Running with quick mode enabled. Will only load the first 1000 airports and routes that connect them.");
+		}
 
-		using var greeter = new HelloWorldExample("bolt://localhost:7687", "neo4j", "password");
-		greeter.PrintGreeting("hello, world");
+        using var greeter = new HelloWorldExample("bolt://localhost:7687", "neo4j", "password");
+		Console.WriteLine("Flushing DB...");
+        greeter.FlushDB();
+		Console.WriteLine("DB flush completed.\n");
+
+		Console.WriteLine("Beginning DB rebuild...");
+
+		Console.WriteLine("Adding airport nodes...");
+		Console.Write("                     ]\r[");
+		int progressCounter = 0;
+		HashSet<string> safeIDs = new HashSet<string>();
+        foreach (string line in File.ReadLines("./airports.csv")) 
+		{
+			List<string> tokens = line.Replace("\"", "").Split(',').ToList();
+			greeter.CreateNode(tokens);
+
+			progressCounter++;
+			if (progressCounter % ((quickModeEnabled ? 300 : 7698) / 20) == 0) 
+			{
+				Console.Write("█");
+			}
+
+			if (quickModeEnabled) 
+			{
+				safeIDs.Add(tokens[0]);
+			}
+
+			if (quickModeEnabled && progressCounter >= 300)
+				break;
+		}
+		Console.WriteLine("]\nAirport nodes added.");
+
+        Console.WriteLine("Adding route relations...");
+        Console.Write("                     ]\r[");
+        progressCounter = 0;
+        foreach (string line in File.ReadLines("./routes.csv"))
+        {
+            List<string> tokens = line.Replace("\"", "").Split(',').ToList();
+
+            progressCounter++;
+            if (progressCounter % (67663 / 20) == 0)
+            {
+                Console.Write("█");
+            }
+
+            if (tokens[3] == "\\N" || tokens[5] == "\\N")
+				continue;
+
+			if (quickModeEnabled && (!safeIDs.Contains(tokens[3]) || !safeIDs.Contains(tokens[5])))
+				continue;
+
+            greeter.CreateRelation(tokens);
+        }
+        Console.WriteLine("]\nRoute relations added.");
+
+        Console.WriteLine("Database rebuild complete.");
+
+
+
 		Console.ReadLine();
 	}
 }

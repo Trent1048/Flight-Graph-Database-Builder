@@ -37,3 +37,5 @@ C:\Users\colli\Desktop\CPTS 415\ParserCode\Create Node4j Database\Create Node4j 
 C:\Users\colli\Desktop\CPTS 415\ParserCode\Create Node4j Database\Create Node4j Database\obj\Debug\net6.0\Create Node4j Database.pdb
 C:\Users\colli\Desktop\CPTS 415\ParserCode\Create Node4j Database\Create Node4j Database\obj\Debug\net6.0\Create Node4j Database.genruntimeconfig.cache
 C:\Users\colli\Desktop\CPTS 415\ParserCode\Create Node4j Database\Create Node4j Database\obj\Debug\net6.0\ref\Create Node4j Database.dll
+C:\Users\colli\Desktop\CPTS 415\ParserCode\Create Node4j Database\Create Node4j Database\bin\Debug\net6.0\airports.csv
+C:\Users\colli\Desktop\CPTS 415\ParserCode\Create Node4j Database\Create Node4j Database\bin\Debug\net6.0\routes.csv

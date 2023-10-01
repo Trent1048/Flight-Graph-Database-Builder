@@ -13,4 +13,13 @@
     <PackageReference Include="Neo4j.Driver" Version="5.13.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="airports.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="routes.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
