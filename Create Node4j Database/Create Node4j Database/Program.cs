@@ -9,39 +9,57 @@ public class HelloWorldExample : IDisposable
 		_driver = GraphDatabase.Driver(uri, AuthTokens.Basic(user, password));
 	}
 
-	public void PrintGreeting(string message)
+	//Refactor into generic RunCypher function
+	public async void PrintGreeting(string message)
 	{
 		using var session = _driver.AsyncSession();
-		var greeting = session.ExecuteWriteAsync(
-		tx => {
+		var greeting = await session.ExecuteWriteAsync(
+			async tx => {
+				var result = await tx.RunAsync(
+					"CREATE (a:Company)" + 
+					"SET a.message = 'Hello World'" +
+					"RETURN a.message + ', from node ' + id(a)"
+					);
+					return (await result.SingleAsync())[0].As<string>();
+			}
+		);
 
-				return tx.RunAsync("CREATE (a:Company {name: $message})", new { message });
-
-				//var result = tx.RunAsync(
-				//	"CREATE (a:Greeting) " +
-				//	"SET a.message = $message " +
-				//	"RETURN a.message + ', from node ' + id(a)",
-				//	new { message });
-				//
-				//return result;
-				//return result.Single()[0].As<string>();
-			});
-
-		Console.WriteLine("AAAAAAAAAHHHHHHHHHHHHHHHHH");
-		Console.WriteLine(greeting);
-		Console.WriteLine("AAAAAAAAAHHHHHHHHHHHHHHHHH 2");
-	}
+        Console.WriteLine(greeting);
+    }
 
 	public void Dispose()
 	{
 		_driver?.Dispose();
 	}
 
+	/*CLEANUP FUNCTION DELETES EVERYTHING*/
+	public void FlushDB() 
+	{
+		//DELETE STUFF
+	}
+
+	public string CreateNode(List<string> line) 
+	{
+		//CREATE ONE NODE FROM CSV FILE
+		return "";
+	}
+
+	public string CreateRelation(List<string> line) 
+	{
+		//CREATE ONE RELATION FROM CSV
+		return "";
+	}
+
 	public static void Main()
 	{
-		using var greeter = new HelloWorldExample("bolt://localhost:7687", "neo4j", "password");
+		//Open CSVs
+		//Create each node
+		//Create each link
+		//Profit
 
+		using var greeter = new HelloWorldExample("bolt://localhost:7687", "neo4j", "password");
 		greeter.PrintGreeting("hello, world");
+		Console.ReadLine();
 	}
 }
 

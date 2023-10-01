@@ -133,19 +133,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\trent\\.nuget\\packages\\": {}
+    "C:\\Users\\colli\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\trent\\OneDrive\\School Work\\WSU\\Fall 2023\\Big Data\\Flight-Graph-Database-Builder\\Create Node4j Database\\Create Node4j Database\\Create Node4j Database.csproj",
+      "projectUniqueName": "C:\\Users\\colli\\Desktop\\CPTS 415\\ParserCode\\Create Node4j Database\\Create Node4j Database\\Create Node4j Database.csproj",
       "projectName": "Create Node4j Database",
-      "projectPath": "C:\\Users\\trent\\OneDrive\\School Work\\WSU\\Fall 2023\\Big Data\\Flight-Graph-Database-Builder\\Create Node4j Database\\Create Node4j Database\\Create Node4j Database.csproj",
-      "packagesPath": "C:\\Users\\trent\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\trent\\OneDrive\\School Work\\WSU\\Fall 2023\\Big Data\\Flight-Graph-Database-Builder\\Create Node4j Database\\Create Node4j Database\\obj\\",
+      "projectPath": "C:\\Users\\colli\\Desktop\\CPTS 415\\ParserCode\\Create Node4j Database\\Create Node4j Database\\Create Node4j Database.csproj",
+      "packagesPath": "C:\\Users\\colli\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\colli\\Desktop\\CPTS 415\\ParserCode\\Create Node4j Database\\Create Node4j Database\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\trent\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\colli\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -192,7 +192,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.414\\RuntimeIdentifierGraph.json"
       }
     }
   }
